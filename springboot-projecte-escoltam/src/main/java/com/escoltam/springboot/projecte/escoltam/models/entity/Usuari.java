@@ -41,7 +41,7 @@ public class Usuari implements Serializable {
 	private String nom;
 	private String cognoms;
 
-	private Long phone;
+	private String phone;
 
 	@Column(unique = true)
 	private String email;
@@ -72,11 +72,11 @@ public class Usuari implements Serializable {
 		this.cognoms = cognoms;
 	}
 
-	public Long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

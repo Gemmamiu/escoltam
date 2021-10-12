@@ -43,22 +43,21 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-		// ANDROID
-		clients.inMemory().withClient("androidapp") // client
+		clients.inMemory().withClient("androidapp") //Client ANDROID
 				.secret(passwordEncoder.encode("12345")) // password
 				.scopes("read", "write") // permisos del client
 				.authorizedGrantTypes("password", "refresh_token") // Com obtenir el token (amb credencials)
 				.accessTokenValiditySeconds(3600) // Validesa token (1h)
-				.refreshTokenValiditySeconds(3600); // Temps renovar validesa token (1h)
-
-		// DESKTOP
-		clients.inMemory().withClient("desktopapp")
+				.refreshTokenValiditySeconds(3600) // Temps renovar validesa token (1h)
+				.and()
+				.withClient("desktopapp") //Client DESKTOP
 				.secret(passwordEncoder.encode("12345"))
 				.scopes("read", "write")
 				.authorizedGrantTypes("password", "refresh_token")
 				.accessTokenValiditySeconds(3600)
 				.refreshTokenValiditySeconds(3600);
 	}
+
 
 	// Configuració dels ENDPOINTS --> Proces de autentificació i validació token
 	@Override
@@ -77,9 +76,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-		jwtAccessTokenConverter.setSigningKey(JwtConfig.SECRET_KEY);
-		//jwtAccessTokenConverter.setSigningKey(JwtConfig.RSA_PRIVATE);// Clau que firma
-		//jwtAccessTokenConverter.setVerifierKey(JwtConfig.RSA_PUBLIC); // Clau que verifica
+		//jwtAccessTokenConverter.setSigningKey(JwtConfig.SECRET_KEY);
+		jwtAccessTokenConverter.setSigningKey(JwtConfig.RSA_PRIVATE);// Clau que firma
+		jwtAccessTokenConverter.setVerifierKey(JwtConfig.RSA_PUBLIC); // Clau que verifica
 		return jwtAccessTokenConverter;
 	}
 
