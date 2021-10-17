@@ -9,7 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.escoltam.springboot.projecte.escoltam.models.dao.IUsuariDao;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 
-//Classe per implementar metodes de service
+/**
+ * Classe per implementar metodes de service
+ * @author Gemma Rica
+ *
+ */
 @Service
 public class UsuariServiceImpl implements IUsuariService{
 
@@ -19,8 +23,13 @@ public class UsuariServiceImpl implements IUsuariService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Usuari> findAll() {
-		
 		return (List<Usuari>) usuariDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Usuari findById(Long id) {	
+		return usuariDao.findById(id).orElse(null);
 	}
 
 }

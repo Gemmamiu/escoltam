@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Classe que implementa l'objecte role
+ * @author Gemma Rica
+ *
+ */
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {

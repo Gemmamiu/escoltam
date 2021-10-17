@@ -2,9 +2,14 @@ package com.escoltam.springboot.projecte.escoltam.auth;
 
 public class JwtConfig {
 	
-	//Clau que sempre es guarda al servidor
+	/**
+	 * Clau que sempre es guarda al servidor
+	 */
 	public static final String SECRET_KEY = "clau.secreta.12345";
 	
+	/**
+	 * Clau RSA privada
+	 */
 	public static final String RSA_PRIVATE = "-----BEGIN RSA PRIVATE KEY-----\r\n"
 			+ "MIIEogIBAAKCAQEA0pqDLzG01d4KQCOxa3nKEGuwho/JPwHydUE8dliCQiJFc6qs\r\n"
 			+ "umf8N9Ui2iznWwhkGYTAICRnD89Bmnxj/8z8Xjas/M3ar5ZsoyAJWVomuqYYsRaB\r\n"
@@ -32,7 +37,9 @@ public class JwtConfig {
 			+ "4nazDZYQIOsmn0Y8BSKpiYi94ZuquIMiukGIQDiYaPEujfxRX9cLre8tBbE/fKkp\r\n"
 			+ "2ykfmlVcBKxyZPNmtXpeX+HgmEN/mEJLuI1PnLxwuz+3m4Be2i8=\r\n"
 			+ "-----END RSA PRIVATE KEY-----";
-	
+	/**
+	 * Clau RSA publica
+	 */
 	public static final String RSA_PUBLIC = "-----BEGIN PUBLIC KEY-----\r\n"
 			+ "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0pqDLzG01d4KQCOxa3nK\r\n"
 			+ "EGuwho/JPwHydUE8dliCQiJFc6qsumf8N9Ui2iznWwhkGYTAICRnD89Bmnxj/8z8\r\n"

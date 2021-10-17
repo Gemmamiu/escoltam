@@ -18,11 +18,17 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/**
+ * Classe que implementa l'objecte Usuari
+ * 
+ * @author Gemma Rica
+ *
+ */
 @Entity
 @Table(name = "usuaris")
 public class Usuari implements Serializable {
 
-	public enum Gender {
+	public enum Voice {
 		MALE, FEMALE
 	}
 
@@ -30,70 +36,38 @@ public class Usuari implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true, length = 20)
+	// El username serà el correu de l'usuari
+	@Column(unique = true, length = 50)
 	private String username;
 
 	@Column(length = 60)
 	private String password;
 
 	private Boolean enabled;
-	
-	private String nom;
-	private String cognoms;
-
-	private String phone;
-
-	@Column(unique = true)
-	private String email;
 
 	@Enumerated(EnumType.STRING)
-	private Gender gender;
+	private Voice voice;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="usuaris_roles", joinColumns= @JoinColumn(name="usuari_id"),
-	inverseJoinColumns=@JoinColumn(name="role_id"),
-	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuari_id", "role_id"})})
+	@JoinTable(name = "usuaris_roles", joinColumns = @JoinColumn(name = "usuari_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "usuari_id", "role_id" }) })
 	private List<Role> roles;
-	
 
-	public String getNom() {
-		return nom;
+	// GETTERS AND SETTERS
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String nom) {
-		this.nom = nom;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getCognoms() {
-		return cognoms;
+	public Voice getVoice() {
+		return voice;
 	}
 
-	public void setSurnames(String cognoms) {
-		this.cognoms = cognoms;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public void setVoice(Voice voice) {
+		this.voice = voice;
 	}
 
 	public Long getId() {
@@ -102,14 +76,6 @@ public class Usuari implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {

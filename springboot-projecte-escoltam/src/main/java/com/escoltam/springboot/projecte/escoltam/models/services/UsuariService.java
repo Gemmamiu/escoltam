@@ -18,7 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.escoltam.springboot.projecte.escoltam.models.dao.IUsuariDao;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 
-//Per fer la autentificació amb JPA
+/**
+ * Per fer la autentificació amb JPA
+ * @author Gemma Rica
+ *
+ */
 @Service
 public class UsuariService implements UserDetailsService{
 
@@ -27,6 +31,7 @@ public class UsuariService implements UserDetailsService{
 	@Autowired
 	private IUsuariDao usuariDao;
 	
+	//El username és el correu de l'usuari
 	@Override
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,8 +40,8 @@ public class UsuariService implements UserDetailsService{
 		
 		//Control errors
 		if(usuari == null) {
-			logger.error("Error al Login: L'usuari '"+username+"' no existeix");
-			throw new UsernameNotFoundException("Error al Login: L'usuari '"+username+"' no existeix");
+			logger.error("Error al Login: L'usuari amb correu '"+username+"' no existeix");
+			throw new UsernameNotFoundException("Error al Login: L'usuari amb correu'"+username+"' no existeix");
 		}
 		
 		//Obtenir llista de rols d'usuari

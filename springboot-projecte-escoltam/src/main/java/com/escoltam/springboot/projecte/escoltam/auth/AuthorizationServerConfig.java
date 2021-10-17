@@ -14,11 +14,16 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-/*Classe que s'encarrega del proces de l'autentificacióde oauth2.
+/**
+ * Classe que s'encarrega del proces de l'autentificacióde oauth2.
  * Tot el que té a veure amb el Token, crear loging, crear el token, validar-lo...
+ * @author Gemma Rica
+ *
  */
 
-//Configuració servidor
+/**
+ * Metode per configurar el servidor
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -30,7 +35,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authenticationManager;
 
-	//Configuració dels PERMISOS dels endpoints
+	/**
+	 * Configuració dels PERMISOS dels endpoints
+	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 
@@ -39,7 +46,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	}
 
-	// Configuració dels CLIENTS(Aplicacions) --> Registrar clients per ID i contrasenya
+	/**
+	 * Configuració dels CLIENTS(Aplicacions) --> Registrar clients per ID i contrasenya
+	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
@@ -59,7 +68,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 
 
-	// Configuració dels ENDPOINTS --> Proces de autentificació i validació token
+	/**
+	 * Configuració dels ENDPOINTS --> Proces de autentificació i validació token
+	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
