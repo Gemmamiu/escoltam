@@ -2,6 +2,7 @@ package com.escoltam.springboot.projecte.escoltam.models.services;
 
 import java.util.List;
 
+import com.escoltam.springboot.projecte.escoltam.models.entity.Role;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 
 /**
@@ -23,5 +24,18 @@ public interface IUsuariService {
 	 * @return Usuari
 	 */
 	public Usuari findById(Long id);
+	
+	/**
+	 * AFEGIR usuari en la taula usuaris
+	 * @param usuari
+	 * @return L'objecte usuari creat
+	 */
+	public Usuari save(Usuari usuari);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Role> findAllRoles();
 	
 }

@@ -22,7 +22,7 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true, length = 20)
+	@Column(unique = true, length = 60, nullable = false)
 	private String name;
 
 	public Long getId() {

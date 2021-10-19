@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.escoltam.springboot.projecte.escoltam.models.dao.IUsuariDao;
+import com.escoltam.springboot.projecte.escoltam.models.entity.Role;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 
 /**
@@ -30,6 +31,18 @@ public class UsuariServiceImpl implements IUsuariService{
 	@Transactional(readOnly=true)
 	public Usuari findById(Long id) {	
 		return usuariDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Usuari save(Usuari usuari) {
+		return usuariDao.save(usuari);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Role> findAllRoles() {
+		return usuariDao.findAllRoles();
 	}
 
 }
