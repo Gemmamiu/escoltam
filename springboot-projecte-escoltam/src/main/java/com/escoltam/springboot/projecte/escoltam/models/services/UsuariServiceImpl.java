@@ -32,6 +32,13 @@ public class UsuariServiceImpl implements IUsuariService{
 	public Usuari findById(Long id) {	
 		return usuariDao.findById(id).orElse(null);
 	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Usuari findByUsername(String username) {	
+		return usuariDao.findByUsername(username);
+	}
+
 
 	@Override
 	@Transactional

@@ -1,5 +1,9 @@
 package com.escoltam.springboot.projecte.escoltam.auth;
-
+/**
+ * Classe que emmagatzema les claus
+ * @author Gemma Rica
+ *
+ */
 public class JwtConfig {
 	
 	/**

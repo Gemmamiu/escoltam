@@ -26,6 +26,13 @@ public interface IUsuariService {
 	public Usuari findById(Long id);
 	
 	/**
+	 * CERCAR usuaris per username
+	 * @param username
+	 * @return Usuari
+	 */
+	public Usuari findByUsername(String username);
+	
+	/**
 	 * AFEGIR usuari en la taula usuaris
 	 * @param usuari
 	 * @return L'objecte usuari creat

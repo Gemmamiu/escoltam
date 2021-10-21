@@ -19,7 +19,7 @@ import com.escoltam.springboot.projecte.escoltam.models.dao.IUsuariDao;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 
 /**
- * Per fer la autentificació amb JPA
+ * Per fer la autenticació amb JPA
  * @author Gemma Rica
  *
  */
@@ -41,7 +41,7 @@ public class UsuariService implements UserDetailsService{
 		//Control errors
 		if(usuari == null) {
 			logger.error("Error al Login: L'usuari amb correu '"+username+"' no existeix");
-			throw new UsernameNotFoundException("Error al Login: L'usuari amb correu'"+username+"' no existeix");
+			throw new UsernameNotFoundException("Error al Login: L'usuari amb correu '"+username+"' no existeix");
 		}
 		
 		//Obtenir llista de rols d'usuari

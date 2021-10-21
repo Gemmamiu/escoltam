@@ -46,9 +46,9 @@ public class UsuariRestController {
 	 * CERCAR usuaris
 	 * @param id identificador
 	 * @return usuariService l'usuari amb l'identificador passat per parametre
-	 * @exception DataAccessException error al realiyzar la cria en la bd
+	 * @exception DataAccessException error al realitzar la cria en la bd
 	 */
-	@GetMapping("/usuaris/{id}")
+	/*@GetMapping("/usuaris/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) { 
 		
 		Usuari usuari = null;
@@ -66,6 +66,36 @@ public class UsuariRestController {
 		//Control errors per si no existeix usuari que es cerca
 		if (usuari == null) {
 			response.put("Message", "L'usuari amb " + id + " no existeix!");
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Usuari>(usuari, HttpStatus.OK);
+	}*/
+	
+	/**
+	 * CERCAR usuaris
+	 * @param username username de l'usuari
+	 * @return usuariService l'usuari amb el username passat per parametre
+	 * @exception DataAccessException error al realitzar la cria en la bd
+	 */
+	@GetMapping("/usuaris/{username}")
+	public ResponseEntity<?> show(@PathVariable String username) { 
+		
+		Usuari usuari = null;
+		Map<String, Object> response = new HashMap<>();
+		
+		//Control errors al realitzar la crida en la base de dades
+		try {
+			usuari =  usuariService.findByUsername(username);		
+		}catch(DataAccessException e) {
+			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
+			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		
+		//Control errors per si no existeix usuari que es cerca
+		if (usuari == null) {
+			response.put("Message", "L'usuari amb " + username + " no existeix!");
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
