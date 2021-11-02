@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * Classe que s'encarrega del proces de l'autentificacióde oauth2.
- * Tot el que té a veure amb el Token, crear loging, crear el token, validar-lo...
+ * Tot el que té a veure amb el Token, crear login, crear el token, validar-lo...
  * @author Gemma Rica
  *
  */
@@ -69,7 +69,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 
 	/**
-	 * Configuració dels ENDPOINTS --> Proces de autentificació i validació token
+	 * Configuració dels ENDPOINTS --> Proces de autenticació i validació token
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

@@ -52,4 +52,12 @@ public class UsuariServiceImpl implements IUsuariService{
 		return usuariDao.findAllRoles();
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public List<Usuari> findByVoice(String voice) {
+		return usuariDao.findByVoice();
+	}
+	
+
+
 }

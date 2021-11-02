@@ -45,4 +45,8 @@ public interface IUsuariService {
 	 */
 	public List<Role> findAllRoles();
 	
+	public List<Usuari> findByVoice(String voice);
+	
+
+	
 }

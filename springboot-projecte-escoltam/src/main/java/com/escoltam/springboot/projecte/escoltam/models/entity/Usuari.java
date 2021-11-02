@@ -3,7 +3,7 @@ package com.escoltam.springboot.projecte.escoltam.models.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -52,7 +52,7 @@ public class Usuari implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Voice voice;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuaris_roles", joinColumns = @JoinColumn(name = "usuari_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "usuari_id", "role_id" }) })
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

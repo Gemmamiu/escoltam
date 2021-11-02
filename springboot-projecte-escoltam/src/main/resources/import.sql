@@ -5,6 +5,7 @@ INSERT INTO usuaris (username, password, enabled, voice) VALUES ('jonatanchaler@
 INSERT INTO usuaris (username, password, enabled, voice) VALUES ('JoGomLoz@gmail.com','$2a$10$RmdEsvEfhI7Rcm9f/uZXPebZVCcPC7ZXZwV51efAvMAp1rIaRAfPK', true, 'MALE');
 INSERT INTO usuaris (username, password, enabled, voice) VALUES ('mariaprova@gmail.com','$2a$10$RmdEsvEfhI7Rcm9f/uZXPebZVCcPC7ZXZwV51efAvMAp1rIaRAfPK', true, 'FEMALE');
 
+
 INSERT INTO roles (name) VALUES ('ROLE_USER');
 INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
 

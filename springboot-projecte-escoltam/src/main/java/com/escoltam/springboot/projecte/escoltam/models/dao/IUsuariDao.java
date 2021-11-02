@@ -35,5 +35,7 @@ public interface IUsuariDao extends CrudRepository<Usuari, Long>{
 	@Query("from Role")
 	public List<Role> findAllRoles();
 	
+	@Query("select u from Usuari u where u.voice=?1")
+	public List<Usuari> findByVoice();
 
 }
