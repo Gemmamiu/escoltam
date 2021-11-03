@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ import com.escoltam.springboot.projecte.escoltam.models.services.IUsuariService;
 public class SignInRestController {
 	@Autowired
 	private IUsuariService usuariService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	/**
 	 * REGISTRE usuari
@@ -37,6 +41,9 @@ public class SignInRestController {
 		//Control errors al realitzar la crida en la base de dades
 		try {
 			
+			
+			usuariNew = usuariService.save(usuari);
+			usuariNew.setPassword(passwordEncoder.encode(usuariNew.getPassword()));
 			usuariNew = usuariService.save(usuari);
 
 		} catch(DataAccessException e) {

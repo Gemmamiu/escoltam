@@ -2,8 +2,12 @@ package com.escoltam.springboot.projecte.escoltam.models.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.escoltam.springboot.projecte.escoltam.models.entity.Role;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
+import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari.Voice;
 
 /**
  * On li donarem els mètodes del CRUD
@@ -19,11 +23,10 @@ public interface IUsuariService {
 	public List<Usuari> findAll();
 	
 	/**
-	 * CERCAR usuaris per id
-	 * @param id
+	 * LLISTAR usuaris per pagina
 	 * @return Usuari
 	 */
-	public Usuari findById(Long id);
+	public Page<Usuari> findAll(Pageable pageable);
 	
 	/**
 	 * CERCAR usuaris per username
@@ -40,13 +43,24 @@ public interface IUsuariService {
 	public Usuari save(Usuari usuari);
 	
 	/**
-	 * 
-	 * @return
+	 * LLISTAR rols
+	 * @return Llistat de rols
 	 */
 	public List<Role> findAllRoles();
 	
-	public List<Usuari> findByVoice(String voice);
+	/**
+	 * LLISTAT d'usuaris amb la VEU passada com a parametre
+	 * @param voice veu
+	 * @return Llistat d'usuaris amb la veu escollida.
+	 */
+	public List<Usuari> listAll(Voice voice);
 	
+	/**
+	 * LLISTAT d'usuaris amb el rol passat com a parametre
+	 * @param role_name nom del rol
+	 * @return Llistat d'usuaris segons el rol.
+	 */
+	public List<Usuari>listAll(String role_name);
 
 	
 }

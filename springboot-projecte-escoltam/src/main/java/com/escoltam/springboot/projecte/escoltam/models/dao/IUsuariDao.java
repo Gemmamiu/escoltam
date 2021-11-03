@@ -3,10 +3,12 @@ package com.escoltam.springboot.projecte.escoltam.models.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.escoltam.springboot.projecte.escoltam.models.entity.Role;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
+import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari.Voice;
 
 
 /**
@@ -15,7 +17,7 @@ import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
  * @author Gemma Rica
  *
  */
-public interface IUsuariDao extends CrudRepository<Usuari, Long>{
+public interface IUsuariDao extends JpaRepository<Usuari, Long>{
 	
 	/**
 	 * Buscar per email (username)
@@ -35,7 +37,19 @@ public interface IUsuariDao extends CrudRepository<Usuari, Long>{
 	@Query("from Role")
 	public List<Role> findAllRoles();
 	
-	@Query("select u from Usuari u where u.voice=?1")
-	public List<Usuari> findByVoice();
-
+	/**
+	 * Llistar usuaris segons la veu escollida
+	 * @param voice veu
+	 * @return Llistat d'usuaris
+	 */
+	@Query("select u from Usuari u where u.voice like :#{#voice}")
+	public List<Usuari> findByVoice(@Param("voice") Voice voice);
+	
+	/**
+	 * Llistar usuaris segons rol
+	 * @param role_name nom del rol
+	 * @return Llistat d'usuaris
+	 */
+	@Query("select u from Usuari u join u.roles r where r.name like :#{#roleName}")
+	public List<Usuari> findByRole(@Param("roleName") String role_name);
 }
