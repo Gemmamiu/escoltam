@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,6 +74,13 @@ public class UsuariServiceImpl implements IUsuariService{
 			return usuariDao.findByRole(role_name);
 		}
 		return usuariDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public void delete(String username) {
+		usuariDao.deleteByUsername(username);
+		
 	}
 
 

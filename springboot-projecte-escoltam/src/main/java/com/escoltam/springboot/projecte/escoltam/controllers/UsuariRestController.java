@@ -13,8 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +37,14 @@ import com.escoltam.springboot.projecte.escoltam.models.services.IUsuariService;
 public class UsuariRestController {
 
 	@Autowired
-	private IUsuariService usuariService;	
-		
+	private IUsuariService usuariService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	
+	// PANTALLA ADMIN amb les funcions
+	
 	/**
 	 * LLISTAR usuaris
 	 * @return Llista d'usuaris
@@ -63,6 +73,7 @@ public class UsuariRestController {
 	 * @return usuariService l'usuari amb el username passat per parametre
 	 * @exception DataAccessException error al realitzar la cria en la bd
 	 */
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/usuaris/{username}")
 	public ResponseEntity<?> show(@PathVariable String username) { 
@@ -72,7 +83,8 @@ public class UsuariRestController {
 		
 		//Control errors al realitzar la crida en la base de dades
 		try {
-			usuari =  usuariService.findByUsername(username);		
+			
+			usuari =  usuariService.findByUsername(username);
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -158,5 +170,104 @@ public class UsuariRestController {
 		}
 		
 		return new ResponseEntity<List<Usuari>>(listUsuaris, HttpStatus.OK);
+	}
+	
+	//PERFIL USUARI I ADMIN
+	
+	/**
+	 * PERFIL USUARI
+	 * @param username email de l'usuari
+	 * @return el perfil de l'usuari
+	 */
+	@GetMapping("/usuaris/profile/{username}")
+	public ResponseEntity<?> showProfile(@PathVariable String username) { 
+		
+		Usuari usuari = null;
+		Map<String, Object> response = new HashMap<>();
+		
+		//Control errors al realitzar la crida en la base de dades
+		try {
+			
+			usuari =  usuariService.findByUsername(username);
+		}catch(DataAccessException e) {
+			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
+			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		
+		//Control errors per si no existeix usuari que es cerca
+		if (usuari == null) {
+			response.put("Message", "L'usuari amb " + username + " no existeix!");
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Usuari>(usuari, HttpStatus.OK);
+	}
+	
+	/**
+	 * ESBORRAR usuari
+	 * @param username email de l'usuari
+	 * @return Http status OK -> s'ha esborrat correctament
+	 */
+	@DeleteMapping("/usuaris/profile/{username}")
+	public ResponseEntity<?> delete(@PathVariable String username) {
+	
+		Map<String, Object> response = new HashMap<>();
+		
+		try {
+		
+			usuariService.delete(username);
+			
+		}catch(DataAccessException e) {
+			response.put("Message", "ERROR a l'hora d'eliminar l'usuari de la base de dades");
+			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		
+		response.put("Message", "L'usuari s'ha eliminat correctament");
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
+	/**
+	 * EDITAR perfil usuari
+	 * @param usuari objecte usuari a editar
+	 * @param username email de l'usuari a editar
+	 * @return usuari actualitzat
+	 */
+	@PutMapping("/usuaris/profile/{username}")
+	public ResponseEntity<?> update(@RequestBody Usuari usuari, @PathVariable String username) {
+		
+		Map<String, Object> response = new HashMap<>();
+
+		Usuari usuariActual = usuariService.findByUsername(username);
+		
+		Usuari usuariUpdate = null;
+		
+		//Control errors per si no existeix usuari que es cerca
+		if (usuariActual == null) {
+			response.put("Message", "Error, l'usuari no s'ha pogut editar, l'usuari " + username + " no existeix en la base de dades!");
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		
+		//Control errors al realitzar la crida en la base de dades
+		try {
+					
+			usuariActual.setVoice(usuari.getVoice());
+			usuariActual.setPassword(passwordEncoder.encode(usuari.getPassword()));
+			
+			usuariUpdate = usuariService.save(usuariActual);
+			
+		}catch(DataAccessException e) {
+			response.put("Message", "ERROR a l'hora d'actualitzar el client en la base de dades");
+			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("Message", "L'usuari s'ha actualitzat correctament");
+		response.put("usuari", usuariUpdate);
+		
+		
+		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
 }

@@ -61,6 +61,8 @@ public interface IUsuariService {
 	 * @return Llistat d'usuaris segons el rol.
 	 */
 	public List<Usuari>listAll(String role_name);
+	
+	public void delete(String username);
 
 	
 }

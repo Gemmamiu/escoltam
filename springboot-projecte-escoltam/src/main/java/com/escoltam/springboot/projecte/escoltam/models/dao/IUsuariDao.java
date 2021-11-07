@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 
 import com.escoltam.springboot.projecte.escoltam.models.entity.Role;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
@@ -52,4 +53,8 @@ public interface IUsuariDao extends JpaRepository<Usuari, Long>{
 	 */
 	@Query("select u from Usuari u join u.roles r where r.name like :#{#roleName}")
 	public List<Usuari> findByRole(@Param("roleName") String role_name);
+	
+	@Modifying
+	@Query("delete from Usuari u where u.username=?1")
+	public void deleteByUsername(String username);
 }
