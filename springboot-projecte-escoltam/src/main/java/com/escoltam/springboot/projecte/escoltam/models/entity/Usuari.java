@@ -13,12 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 
 /**
@@ -28,7 +29,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "usuaris")
+@Table(name = "usuari")
 public class Usuari implements Serializable {
 
 	public enum Voice {
@@ -53,7 +54,7 @@ public class Usuari implements Serializable {
 	private Voice voice;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "usuaris_roles", joinColumns = @JoinColumn(name = "usuari_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
+	@JoinTable(name = "usuari_role", joinColumns = @JoinColumn(name = "usuari_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "usuari_id", "role_id" }) })
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Role> roles;

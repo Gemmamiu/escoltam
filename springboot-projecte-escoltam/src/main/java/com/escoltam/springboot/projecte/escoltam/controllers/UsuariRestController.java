@@ -52,6 +52,7 @@ public class UsuariRestController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/usuaris")
 	public List<Usuari> index(){
+		System.out.println("Mostra llistat d'usuaris");
 		return usuariService.findAll(); //endpoint
 	}
 	
@@ -83,20 +84,22 @@ public class UsuariRestController {
 		
 		//Control errors al realitzar la crida en la base de dades
 		try {
-			
 			usuari =  usuariService.findByUsername(username);
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora de realitzar la consula en la base de dades amb codi "+ HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		//Control errors per si no existeix usuari que es cerca
 		if (usuari == null) {
 			response.put("Message", "L'usuari amb " + username + " no existeix!");
+			System.out.println("L'usuari no existeix, codi " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
+		System.out.println("Cerca de l'usuari " + username + " amb codi " + HttpStatus.OK);
 		return new ResponseEntity<Usuari>(usuari, HttpStatus.OK);
 	}
 	
@@ -107,6 +110,7 @@ public class UsuariRestController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/usuaris/roles")
 	public List<Role> listRoles(){
+		System.out.println("Mostra llistat de rols");
 		return usuariService.findAllRoles();
 	}
 	
@@ -129,15 +133,17 @@ public class UsuariRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora de realitzar la consula en la base de dades amb codi "+ HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		//Control errors per si no existeix usuari que es cerca
 		if (listUsuaris == null) {
 			response.put("Message", "La veu " + voice + " no existeix!");
+			System.out.println("La veu no existeix, codi " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
-		
+		System.out.println("Cerca de veu " + voice + " amb codi " + HttpStatus.OK);
 		return new ResponseEntity<List<Usuari>>(listUsuaris, HttpStatus.OK);
 	}
 	
@@ -160,15 +166,17 @@ public class UsuariRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora de realitzar la consula en la base de dades amb codi "+ HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		//Control errors per si no existeix usuari que es cerca
 		if (listUsuaris == null) {
 			response.put("Message", "El rol " + role_name + " no existeix!");
+			System.out.println("El rol no existeix, coid " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
-		
+		System.out.println("Cerca de rol " + role_name + " amb codi " + HttpStatus.OK);
 		return new ResponseEntity<List<Usuari>>(listUsuaris, HttpStatus.OK);
 	}
 	
@@ -192,15 +200,18 @@ public class UsuariRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora de realitzar la consula en la base de dades amb codi "+ HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		//Control errors per si no existeix usuari que es cerca
 		if (usuari == null) {
 			response.put("Message", "L'usuari amb " + username + " no existeix!");
+			System.out.println("L'usuari no existeix, codi " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
+		System.out.println("Cerca d'usuari " + username + " amb codi " + HttpStatus.OK);
 		return new ResponseEntity<Usuari>(usuari, HttpStatus.OK);
 	}
 	
@@ -221,11 +232,12 @@ public class UsuariRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora d'eliminar l'usuari de la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora de realitzar la consula en la base de dades amb codi "+ HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		response.put("Message", "L'usuari s'ha eliminat correctament");
-		
+		System.out.println("L'usuari s'ha eliminat correctament, codi " + HttpStatus.OK);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
@@ -261,13 +273,14 @@ public class UsuariRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora d'actualitzar el client en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora d'actualitzar el client en la base de dades, codi " + HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		response.put("Message", "L'usuari s'ha actualitzat correctament");
 		response.put("usuari", usuariUpdate);
 		
-		
+		System.out.println("L'usuari s'ha actualitzat correctament, codi " + HttpStatus.CREATED);
 		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
 }

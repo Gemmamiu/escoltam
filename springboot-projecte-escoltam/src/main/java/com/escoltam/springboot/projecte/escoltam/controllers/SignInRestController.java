@@ -52,11 +52,15 @@ public class SignInRestController {
 		} catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de afegir usuari en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora de afegir usuari en la base de dades, codi: " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		response.put("Message", "L'usuari s'ha creat correctament");
 		response.put("usuari", usuariNew);
+		
+		System.out.println("L'usuari s'ha creat correctament, codi: " + HttpStatus.CREATED);
+		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
@@ -80,6 +84,7 @@ public class SignInRestController {
 		//Control errors per si no existeix usuari que es cerca
 		if (usuariActual == null) {
 			response.put("Message", "Error, l'usuari no s'ha pogut editar, l'usuari " + username + " no existeix en la base de dades!");
+			System.out.println("Error, l'usuari no s'ha pogut editar, codi " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
@@ -91,14 +96,16 @@ public class SignInRestController {
 			usuariUpdate = usuariService.save(usuariActual);
 			
 		}catch(DataAccessException e) {
-			response.put("Message", "ERROR a l'hora d'actualitzar el client en la base de dades");
+			response.put("Message", "ERROR a l'hora d'actualitzar l'usuari en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			System.out.println("ERROR a l'hora d'actualitzar usuari en la base de dades, codi: " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		response.put("Message", "L'usuari s'ha actualitzat correctament");
 		response.put("usuari", usuariUpdate);
 		
+		System.out.println("L'usuari s'ha actualitzat correctament, codi: " + HttpStatus.CREATED);
 		
 		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
