@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -41,14 +42,15 @@ public class Usuari implements Serializable {
 	private Long id;
 
 	// El username serà el correu de l'usuari
-	@Column(unique = true, length = 50)
+
+	@Column(name="username", unique = true, length = 50, nullable = false)
 	private String username;
 
 	@Column(length = 60)
 	private String password;
 
 	@Column(columnDefinition = "Boolean default false")
-	  private Boolean enabled;
+	private Boolean enabled;
 
 	@Enumerated(EnumType.STRING)
 	private Voice voice;

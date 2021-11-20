@@ -52,8 +52,8 @@ public class SignInRestController {
 		} catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de afegir usuari en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			System.out.println("ERROR a l'hora de afegir usuari en la base de dades, codi: " + HttpStatus.NOT_FOUND);
-			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
+			System.out.println("ERROR a l'hora de afegir usuari en la base de dades, codi: " + HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		response.put("Message", "L'usuari s'ha creat correctament");
@@ -98,7 +98,7 @@ public class SignInRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora d'actualitzar l'usuari en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			System.out.println("ERROR a l'hora d'actualitzar usuari en la base de dades, codi: " + HttpStatus.NOT_FOUND);
+			System.out.println("ERROR a l'hora d'actualitzar usuari en la base de dades, codi: " + HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
