@@ -34,7 +34,7 @@ import javax.persistence.Table;
 public class Usuari implements Serializable {
 
 	public enum Voice {
-		MALE, FEMALE
+		MALE, FEMALE;
 	}
 
 	@Id

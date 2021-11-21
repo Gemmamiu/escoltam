@@ -137,12 +137,13 @@ public class UsuariRestController {
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		//Control errors per si no existeix usuari que es cerca
+		//No ho controlem perquè l'usuari només podrà escollir les dues opcions
+		/*//Control errors per si no existeix veu que es cerca
 		if (listUsuaris == null) {
 			response.put("Message", "La veu " + voice + " no existeix!");
 			System.out.println("La veu no existeix, codi " + HttpStatus.NOT_FOUND);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
-		}
+		}*/
 		System.out.println("Cerca de veu " + voice + " amb codi " + HttpStatus.OK);
 		return new ResponseEntity<List<Usuari>>(listUsuaris, HttpStatus.OK);
 	}

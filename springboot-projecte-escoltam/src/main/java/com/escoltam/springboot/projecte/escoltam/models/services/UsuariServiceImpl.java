@@ -60,9 +60,16 @@ public class UsuariServiceImpl implements IUsuariService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Usuari> listAll(Voice voice) {
-		if (voice != null){
-			return usuariDao.findByVoice(voice);
+		
+		if (voice != null) {
+			if (usuariDao.findByVoice(voice).isEmpty()) {
+				return null;
+			} else {
+				return usuariDao.findByVoice(voice);
+			}
+
 		}
+
 		return usuariDao.findAll();
 	}
 
@@ -70,7 +77,12 @@ public class UsuariServiceImpl implements IUsuariService{
 	@Transactional(readOnly=true)
 	public List<Usuari> listAll(String role_name) {
 		if (role_name != null){
-			return usuariDao.findByRole(role_name);
+			if(usuariDao.findByRole(role_name).isEmpty()) {
+				return null;
+			}else {
+				return usuariDao.findByRole(role_name);
+			}
+			
 		}
 		return usuariDao.findAll();
 	}

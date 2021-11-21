@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 import com.escoltam.springboot.projecte.escoltam.models.services.IUsuariService;
-
+/**
+ * Controller REST: URL per conectar, enviar dades i peticions a l'app 
+ * Controller part abans d'entrar a dins com a usuari de l'aplicació
+ * @author Gemma Rica
+ *
+ */
 @RestController
 @RequestMapping("/")
 public class SignInRestController {
