@@ -1,6 +1,5 @@
 package com.escoltam.springboot.projecte.escoltam.models.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "panell")
-public class Panell implements Serializable {
+@Table(name="panellPredefinit")
+public class PanellPredefinit{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,18 +27,13 @@ public class Panell implements Serializable {
 	private Integer posicio;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
-	@JoinColumn(name="panell_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="panellPredefinit_id")
 	private List<Icona> icones;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties(value={"panell","hibernateLazyInitializer", "handler"}, allowSetters=true)
-	private Usuari usuari;
-
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="panellPredefinit", cascade= CascadeType.ALL)
+	private List<Usuari> usuaris;
 	
-
-	
-	public Panell() {
+	public PanellPredefinit() {
 		icones = new ArrayList<>();
 	}
 
@@ -76,19 +68,15 @@ public class Panell implements Serializable {
 	public void setIcones(List<Icona> icones) {
 		this.icones = icones;
 	}
-	
-	
-	public Usuari getUsuari() {
-		return usuari;
+
+	public List<Usuari> getUsuaris() {
+		return usuaris;
 	}
 
-	public void setUsuari(Usuari usuari) {
-		this.usuari = usuari;
+	public void setUsuaris(List<Usuari> usuaris) {
+		this.usuaris = usuaris;
 	}
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	
 }

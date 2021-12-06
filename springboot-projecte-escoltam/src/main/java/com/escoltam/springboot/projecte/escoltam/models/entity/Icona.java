@@ -1,15 +1,23 @@
 package com.escoltam.springboot.projecte.escoltam.models.entity;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
+
 
 @Entity
 @Table(name="icona")
@@ -24,13 +32,16 @@ public class Icona implements Serializable{
 	private Integer posicio;
 	
 	@Lob
-	private byte[] foto;
+	private Blob foto;
 	
-	private boolean favorits;
+	private boolean favorit;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinTable(name="panell_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Panell panell;
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -47,11 +58,11 @@ public class Icona implements Serializable{
 		this.nom = nom;
 	}
 
-	public byte[] getFoto() {
+	public Blob getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
+	public void setFoto(Blob foto) {
 		this.foto = foto;
 	}
 
@@ -63,23 +74,16 @@ public class Icona implements Serializable{
 		this.posicio = posicio;
 	}
 
-	public boolean isFavorits() {
-		return favorits;
+	public boolean isFavorit() {
+		return favorit;
 	}
 
-	public void setFavorits(boolean favorits) {
-		this.favorits = favorits;
+	public void setFavorit(boolean favorit) {
+		this.favorit = favorit;
 	}
 
-	public Panell getPanell() {
-		return panell;
-	}
 
-	public void setPanell(Panell panell) {
-		this.panell = panell;
-	}
 
-	
 	/**
 	 * 
 	 */

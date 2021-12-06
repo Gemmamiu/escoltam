@@ -1,8 +1,10 @@
 package com.escoltam.springboot.projecte.escoltam.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
 
@@ -60,6 +64,23 @@ public class Usuari implements Serializable {
 			@UniqueConstraint(columnNames = { "usuari_id", "role_id" }) })
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Role> roles;
+	 
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "usuari", cascade= CascadeType.ALL)
+	@JsonIgnoreProperties(value={"usuari","hibernateLazyInitializer", "handler"}, allowSetters=true)
+	private List<Panell> panells;
+		
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinTable(name="panellPredefinit_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private PanellPredefinit panellPredefinit;
+
+	
+	
+	public Usuari() {
+		this.panells = new ArrayList<>();
+
+	}
 
 	// GETTERS AND SETTERS
 	public Long getId() {
@@ -109,6 +130,26 @@ public class Usuari implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+	
+	public PanellPredefinit getPanellPredefinit() {
+		return panellPredefinit;
+	}
+
+	public void setPanellPredefinit(PanellPredefinit panellPredefinit) {
+		this.panellPredefinit = panellPredefinit;
+	}
+
+
+	public List<Panell> getPanells() {
+		return panells;
+	}
+
+	public void setPanells(List<Panell> panells) {
+		this.panells = panells;
+	}
+
+
 
 	/**
 	 * 

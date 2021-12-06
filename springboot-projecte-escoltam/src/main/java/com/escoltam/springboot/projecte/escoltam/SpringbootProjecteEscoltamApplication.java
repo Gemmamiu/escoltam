@@ -18,11 +18,14 @@ public class SpringbootProjecteEscoltamApplication /*implements CommandLineRunne
 	/**
 	 * Mètode main de l'aplicació servidor
 	 * @param args
+	 * @throws Exception 
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootProjecteEscoltamApplication.class, args);
-	}
+		
 
+	}
+	
 	/*//Crear contrasenyes
 	@Override
 	public void run(String... args) throws Exception {
