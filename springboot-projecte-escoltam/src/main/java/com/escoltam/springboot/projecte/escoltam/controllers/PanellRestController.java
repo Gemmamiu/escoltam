@@ -86,6 +86,7 @@ public class PanellRestController {
 		//panellUpdate = panellService.save(panell);
 		panellActual.setNom(panell.getNom());
 		panellActual.setPosicio(panell.getPosicio());
+		panellActual.setFavorit(panell.isFavorit());
 		panellActual.setUsuari(usuari);
 		panellUpdate = panellService.save(panellActual);
 		System.out.println("Panell modificat!");
@@ -99,4 +100,12 @@ public class PanellRestController {
 		System.out.println("Panell borrat!");
 		panellService.delete(id); //endpoint
 	}
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@GetMapping("/panells/fav/{username}")
+	@ResponseStatus(HttpStatus.OK)
+	public Panell showPanellFav (@PathVariable String username) {
+		return panellService.findPanellFavByUsername(username);
+	}
+	
 }

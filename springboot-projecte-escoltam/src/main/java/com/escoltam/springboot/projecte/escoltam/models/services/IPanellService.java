@@ -17,5 +17,7 @@ public interface IPanellService {
 	public void delete(Long id);
 	
 	public List<Panell> findAll();
+	
+	public Panell findPanellFavByUsername(String username);
 }
 

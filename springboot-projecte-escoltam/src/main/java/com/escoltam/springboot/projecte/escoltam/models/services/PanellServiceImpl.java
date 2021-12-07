@@ -43,7 +43,6 @@ public class PanellServiceImpl implements IPanellService{
 	}
 
 
-
 	@Override
 	public List<Panell> findAll() {
 		return (List<Panell>) panellDao.findAll();
@@ -52,8 +51,16 @@ public class PanellServiceImpl implements IPanellService{
 
 
 	@Override
+	@Transactional(readOnly=true)
 	public Panell findPanellById(Long id) {
 		return panellDao.findPanellById(id);
+	}
+
+
+
+	@Override
+	public Panell findPanellFavByUsername(String username) {
+		return panellDao.findPanellFavByUsername(username);
 	}
 
 

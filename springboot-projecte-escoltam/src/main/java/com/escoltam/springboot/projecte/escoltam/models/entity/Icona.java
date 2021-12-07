@@ -34,7 +34,6 @@ public class Icona implements Serializable{
 	@Lob
 	private Blob foto;
 	
-	private boolean favorit;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinTable(name="panell_id")
@@ -73,15 +72,6 @@ public class Icona implements Serializable{
 	public void setPosicio(Integer posicio) {
 		this.posicio = posicio;
 	}
-
-	public boolean isFavorit() {
-		return favorit;
-	}
-
-	public void setFavorit(boolean favorit) {
-		this.favorit = favorit;
-	}
-
 
 
 	/**

@@ -30,12 +30,6 @@ public class IconaRestController {
 		return iconaService.findIconaById(id); //endpoint
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@GetMapping("/icones/{username}/{fav}")
-	@ResponseStatus(HttpStatus.OK)
-	public List<Icona> listFav(@PathVariable String username, @PathVariable Boolean fav){
-		System.out.println("Mostra icona per id");
-		return (List<Icona>) iconaService.findIconesFav(fav, username); //endpoint
-	}
+
 	
 }

@@ -10,5 +10,4 @@ public interface IIconaService {
 	
 	public Icona findIconaById(Long id);
 
-	public List<Icona> findIconesFav(Boolean fav, String username);
 }

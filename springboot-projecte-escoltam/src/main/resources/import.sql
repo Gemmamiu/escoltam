@@ -14,10 +14,10 @@ INSERT INTO usuari_role (usuari_id, role_id) VALUES (2,2);
 INSERT INTO usuari_role (usuari_id, role_id) VALUES (3,2);
 INSERT INTO usuari_role (usuari_id, role_id) VALUES (4,1);
 
-INSERT INTO panell (nom, posicio, usuari_id) VALUES ('Esports',1,1)
-INSERT INTO panell (nom, posicio, usuari_id) VALUES ('Verbs',2,1)
-INSERT INTO panell (nom, posicio, usuari_id) VALUES ('Accions',1,4)
+INSERT INTO panell (nom, posicio, favorit, usuari_id) VALUES ('Esports',1,false,1)
+INSERT INTO panell (nom, posicio, favorit, usuari_id) VALUES ('Verbs',2,true,1)
+INSERT INTO panell (nom, posicio, favorit, usuari_id) VALUES ('Accions',1,true,4)
 
-INSERT INTO icona (nom, posicio, favorit, panell_id) VALUES ('Futbol',1,true,1)
-INSERT INTO icona (nom, posicio, favorit, panell_id) VALUES ('Basquet',2,false,1)
-INSERT INTO icona (nom, posicio, favorit, panell_id) VALUES ('anar',1,false,2)
+INSERT INTO icona (nom, posicio, panell_id) VALUES ('Futbol',1,1)
+INSERT INTO icona (nom, posicio, panell_id) VALUES ('Basquet',2,1)
+INSERT INTO icona (nom, posicio, panell_id) VALUES ('anar',1,2)

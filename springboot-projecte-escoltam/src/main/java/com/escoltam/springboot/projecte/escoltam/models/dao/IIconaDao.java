@@ -16,6 +16,4 @@ public interface IIconaDao extends CrudRepository<Icona, Long>{
 	@Query("select i from Icona i where i.id=?1")
 	public Icona findIconaById (Long id);
 
-	@Query("select i from Icona i where i.favorit=?1 and i.panell = (select p from Panell p where p.usuari=(select u from Usuari u where u.username=?2))")
-	public List<Icona> findIconesFav (Boolean fav, String username);
 }

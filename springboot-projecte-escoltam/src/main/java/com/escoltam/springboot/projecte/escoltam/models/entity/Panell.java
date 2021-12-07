@@ -29,6 +29,8 @@ public class Panell implements Serializable {
 	
 	private Integer posicio;
 	
+	private boolean favorit;
+	
 	@OneToMany(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
 	@JoinColumn(name="panell_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -84,6 +86,15 @@ public class Panell implements Serializable {
 
 	public void setUsuari(Usuari usuari) {
 		this.usuari = usuari;
+	}
+
+
+	public boolean isFavorit() {
+		return favorit;
+	}
+
+	public void setFavorit(boolean favorit) {
+		this.favorit = favorit;
 	}
 
 

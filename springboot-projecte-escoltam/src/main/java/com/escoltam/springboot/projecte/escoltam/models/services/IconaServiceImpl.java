@@ -21,11 +21,6 @@ public class IconaServiceImpl implements IIconaService{
 		return iconaDao.findIconaById(id);
 	}
 
-	@Override
-	public List<Icona> findIconesFav(Boolean fav, String username) {
-		return (List<Icona>) iconaDao.findIconesFav(fav, username);
-	}
-
 
 
 }
