@@ -59,24 +59,24 @@ public class Usuari implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Voice voice;
 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuari_role", joinColumns = @JoinColumn(name = "usuari_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "usuari_id", "role_id" }) })
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Role> roles;
 	 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "usuari", cascade= CascadeType.ALL)
 	@JsonIgnoreProperties(value={"usuari","hibernateLazyInitializer", "handler"}, allowSetters=true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "usuari", cascade= CascadeType.ALL)
 	private List<Panell> panells;
 		
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinTable(name="panellPredefinit_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private PanellPredefinit panellPredefinit;
 
 	
-	
+	//Constructor per inicialitzar un ArrayList de panells
 	public Usuari() {
 		this.panells = new ArrayList<>();
 

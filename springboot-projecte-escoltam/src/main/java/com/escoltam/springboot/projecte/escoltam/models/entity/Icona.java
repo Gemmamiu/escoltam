@@ -3,20 +3,23 @@ package com.escoltam.springboot.projecte.escoltam.models.entity;
 import java.io.Serializable;
 import java.sql.Blob;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-
+/**
+ *  Classe que implementa l'objecte ICONA
+ * @author Gemma Rica
+ *
+ */
 
 
 @Entity
@@ -27,20 +30,30 @@ public class Icona implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nom;
 	
+	@Column(nullable = false)
 	private Integer posicio;
 	
 	@Lob
 	private Blob foto;
 	
 	
+	@JsonIgnoreProperties(value={"icones","hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable(name="panell_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Panell panell;
 	
-	
+
+
+	public Panell getPanell() {
+		return panell;
+	}
+
+	public void setPanell(Panell panell) {
+		this.panell = panell;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -18,14 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 import com.escoltam.springboot.projecte.escoltam.models.services.IUsuariService;
 
-import java.io.ByteArrayOutputStream;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import javax.imageio.ImageIO;
+import java.io.IOException;
+
 /**
  * Controller REST: URL per conectar, enviar dades i peticions a l'app 
  * Controller part abans d'entrar a dins com a usuari de l'aplicació
@@ -73,13 +68,6 @@ public class SignInRestController {
 		
 		response.put("Message", "L'usuari s'ha creat correctament");
 		response.put("usuari", usuariNew);
-	     
-		Path ruta = Paths.get("uploads").resolve("si.jpg").toAbsolutePath();
-		BufferedImage bImage = ImageIO.read(new File(ruta.toString()));
-	      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	      ImageIO.write(bImage, "jpg", bos );
-	      byte [] data = bos.toByteArray();
-	      System.out.println(ruta + "byte:" + data);
 	      
 		System.out.println("L'usuari s'ha creat correctament, codi: " + HttpStatus.CREATED);
 		

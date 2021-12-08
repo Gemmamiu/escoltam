@@ -5,17 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+/**
+ *  Classe que implementa l'objecte PANELL
+ * @author Gemma Rica
+ *
+ */
 
 @Entity
 @Table(name = "panell")
@@ -25,26 +31,28 @@ public class Panell implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nom;
 	
+	@Column(nullable = false)
 	private Integer posicio;
 	
+	@Column(columnDefinition = "Boolean default false", nullable = false)
 	private boolean favorit;
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
-	@JoinColumn(name="panell_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties(value={"panell","hibernateLazyInitializer", "handler"}, allowSetters=true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "panell", cascade= CascadeType.ALL)
 	private List<Icona> icones;
 	
+	@JsonIgnoreProperties(value={"panells","hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties(value={"panell","hibernateLazyInitializer", "handler"}, allowSetters=true)
 	private Usuari usuari;
 
 	
 
-	
+	//Constructor per inicialitzar un ArrayList de icones
 	public Panell() {
-		icones = new ArrayList<>();
+		this.icones = new ArrayList<>();
 	}
 
 	public Long getId() {

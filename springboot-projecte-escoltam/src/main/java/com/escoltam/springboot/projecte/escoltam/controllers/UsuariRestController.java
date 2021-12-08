@@ -233,7 +233,7 @@ public class UsuariRestController {
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora d'eliminar l'usuari de la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			System.out.println("ERROR a l'hora de realitzar la consula en la base de dades amb codi "+ HttpStatus.INTERNAL_SERVER_ERROR);
+			System.out.println("ERROR a l'hora d'eliminar l'usuari de la base de dades amb codi "+ HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
@@ -274,9 +274,9 @@ public class UsuariRestController {
 			usuariUpdate = usuariService.save(usuariActual);
 			
 		}catch(DataAccessException e) {
-			response.put("Message", "ERROR a l'hora d'actualitzar el client en la base de dades");
+			response.put("Message", "ERROR a l'hora d'actualitzar l'usuari en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			System.out.println("ERROR a l'hora d'actualitzar el client en la base de dades, codi " + HttpStatus.INTERNAL_SERVER_ERROR);
+			System.out.println("ERROR a l'hora d'actualitzar l'usuari en la base de dades, codi " + HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
