@@ -41,7 +41,7 @@ public class Panell implements Serializable {
 	private boolean favorit;
 	
 	@JsonIgnoreProperties(value={"panell","hibernateLazyInitializer", "handler"}, allowSetters=true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "panell", cascade= CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "panell", cascade= CascadeType.ALL)
 	private List<Icona> icones;
 	
 	@JsonIgnoreProperties(value={"panells","hibernateLazyInitializer", "handler"}, allowSetters=true)

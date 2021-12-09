@@ -1,7 +1,6 @@
 package com.escoltam.springboot.projecte.escoltam.models.entity;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +36,7 @@ public class Icona implements Serializable{
 	private Integer posicio;
 	
 	@Lob
-	private Blob foto;
+	private byte[] foto;
 	
 	
 	@JsonIgnoreProperties(value={"icones","hibernateLazyInitializer", "handler"}, allowSetters=true)
@@ -70,11 +69,11 @@ public class Icona implements Serializable{
 		this.nom = nom;
 	}
 
-	public Blob getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
