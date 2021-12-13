@@ -146,7 +146,7 @@ public class PanellRestController {
 		Map<String, Object> response = new HashMap<>();
 		Panell panellActual = panellService.findPanellById(id);
 		Panell panellUpdate = null;
-		Usuari usuari = null;
+		Usuari usuari = usuariService.findByUsername(username);
 		
 		// Control errors per si no existeix panell que es cerca
 		if (panellActual == null) {

@@ -1,20 +1,28 @@
 package com.escoltam.springboot.projecte.escoltam;
 
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.context.annotation.Bean;
+
+import com.escoltam.springboot.projecte.escoltam.models.entity.Icona;
+import com.escoltam.springboot.projecte.escoltam.models.entity.PanellPredefinit;
+import com.escoltam.springboot.projecte.escoltam.models.services.IIconaService;
+import com.escoltam.springboot.projecte.escoltam.models.services.IPanellPredefinitService;
+
+
 /**
  * Classe del main
  * @author Gemma Rica
  *
  */
 @SpringBootApplication
-public class SpringbootProjecteEscoltamApplication /*implements CommandLineRunner*/{
+public class SpringbootProjecteEscoltamApplication{
 
-	/*@Autowired
-	private BCryptPasswordEncoder passwordEncoder;*/
 	/**
 	 * Mètode main de l'aplicació servidor
 	 * @param args
@@ -26,15 +34,17 @@ public class SpringbootProjecteEscoltamApplication /*implements CommandLineRunne
 
 	}
 	
-	/*//Crear contrasenyes
-	@Override
-	public void run(String... args) throws Exception {
-		String password = "12345";
-		
-		for(int i = 0; i < 4; i++) {
-			String passwordBcrypt = passwordEncoder.encode(password);
-			System.out.println(passwordBcrypt);
-		}
-	}*/
-
+	@Bean
+	public CommandLineRunner loadData(IIconaService iconaRepository, IPanellPredefinitService panellPredefinitRepository) {
+	    return (args) -> {
+	    	PanellPredefinit panellPredefinit = null;
+	    	Path ruta = Paths.get("src/main/resources/static/images").resolve("si.jpg").toAbsolutePath();
+	    	byte[] array = Files.readAllBytes(ruta);
+	    	System.out.println(ruta);
+	    	System.out.println(array);
+	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(1L);
+	    	iconaRepository.save(new Icona("prova",1,panellPredefinit,array));
+	    };
+	}
+	
 }

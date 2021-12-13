@@ -16,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
@@ -68,13 +67,13 @@ public class Usuari implements Serializable {
 	@JsonIgnoreProperties(value={"usuari","hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "usuari", cascade= CascadeType.ALL)
 	private List<Panell> panells;
-		
 	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable(name="panellPredefinit_id")
-	private PanellPredefinit panellPredefinit;
-
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuari_panellpredefinit", joinColumns = @JoinColumn(name = "usuari_id"), inverseJoinColumns = @JoinColumn(name = "panellpredefinit_id"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "usuari_id", "panellpredefinit_id" }) })
+	private List<PanellPredefinit> panellPredefinits;
+	
 	
 	//Constructor per inicialitzar un ArrayList de panells
 	public Usuari() {
@@ -131,15 +130,6 @@ public class Usuari implements Serializable {
 		this.roles = roles;
 	}
 
-	
-	public PanellPredefinit getPanellPredefinit() {
-		return panellPredefinit;
-	}
-
-	public void setPanellPredefinit(PanellPredefinit panellPredefinit) {
-		this.panellPredefinit = panellPredefinit;
-	}
-
 
 	public List<Panell> getPanells() {
 		return panells;
@@ -149,6 +139,13 @@ public class Usuari implements Serializable {
 		this.panells = panells;
 	}
 
+	public List<PanellPredefinit> getPanellPredefinits() {
+		return panellPredefinits;
+	}
+
+	public void setPanellPredefinits(List<PanellPredefinit> panellPredefinits) {
+		this.panellPredefinits = panellPredefinits;
+	}
 
 
 	/**

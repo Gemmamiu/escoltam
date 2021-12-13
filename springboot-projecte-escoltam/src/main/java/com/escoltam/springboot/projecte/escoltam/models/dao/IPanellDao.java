@@ -21,7 +21,7 @@ public interface IPanellDao extends CrudRepository<Panell, Long>{
 	 * @param username de l'usuari
 	 * @return llistat de panells que té l'usuari
 	 */
-	@Query("select p from Panell p where p.usuari = (select u.id from Usuari u where u.username=?1)")
+	@Query("select p from Panell p left join fetch p.usuari u where u.username=?1")
 	public List<Panell> findAllPanellsByUsername (String username);
 	
 	/**
@@ -30,7 +30,7 @@ public interface IPanellDao extends CrudRepository<Panell, Long>{
 	 * @param username usuari
 	 * @return panell
 	 */
-	@Query("select p from Panell p where p.id=?1 and p.usuari = (select u.id from Usuari u where u.username=?2)")
+	@Query("select p from Panell p left join fetch p.usuari u where p.id=?1 and u.username=?2")
 	public Panell findPanellByUsername(Long id, String username);
 	
 	/**

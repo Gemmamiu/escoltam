@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -114,10 +113,11 @@ public class IconaRestController {
 	 * @param id icona
 	 * @param icona RequestBody
 	 * @return icona editada
+	 * @throws IOException 
 	 */
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PutMapping("/icones/icona/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Icona icona){
+	public ResponseEntity<?> update(@PathVariable Long id, @ModelAttribute Icona icona, BindingResult result, @RequestParam MultipartFile foto) throws IOException{
 		
 		Map<String, Object> response = new HashMap<>();
 		Icona iconaActual = iconaService.findIconaById(id);
@@ -137,6 +137,8 @@ public class IconaRestController {
 
 			iconaActual.setNom(icona.getNom());
 			iconaActual.setPosicio(icona.getPosicio());
+			iconaActual.setFoto(foto.getBytes());
+
 			iconaUpdate = iconaService.save(iconaActual);
 
 		} catch (DataAccessException e) {

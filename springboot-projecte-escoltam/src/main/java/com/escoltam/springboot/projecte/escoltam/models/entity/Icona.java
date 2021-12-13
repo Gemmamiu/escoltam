@@ -43,15 +43,22 @@ public class Icona implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Panell panell;
 	
-
-
-	public Panell getPanell() {
-		return panell;
+	@JsonIgnoreProperties(value={"icones","hibernateLazyInitializer", "handler"}, allowSetters=true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	private PanellPredefinit panellPredefinit;
+	
+	
+	public Icona() {
+		
 	}
 
-	public void setPanell(Panell panell) {
-		this.panell = panell;
+	public Icona(String nom, int posicio, PanellPredefinit panellPredefinit, byte[] foto) {
+		this.nom = nom;
+		this.posicio = posicio;
+		this.panellPredefinit = panellPredefinit;
+		this.foto = foto;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -84,6 +91,15 @@ public class Icona implements Serializable{
 	public void setPosicio(Integer posicio) {
 		this.posicio = posicio;
 	}
+
+
+
+
+	public void setPanell(Panell panell) {
+		this.panell = panell;
+	}
+
+
 
 
 	/**
