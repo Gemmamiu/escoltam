@@ -7,6 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.escoltam.springboot.projecte.escoltam.models.dao.IPanellPredefinitDao;
 import com.escoltam.springboot.projecte.escoltam.models.entity.PanellPredefinit;
 
+/**
+ * Classe per implementar metodes de service
+ * @author Gemma Rica
+ *
+ */
 @Service
 public class PanellPredefinitServiceImpl implements IPanellPredefinitService{
 
@@ -18,14 +23,6 @@ public class PanellPredefinitServiceImpl implements IPanellPredefinitService{
 	public PanellPredefinit findPanellPredefinitById(Long id) {
 		return panellPredefinitDao.findPanellPredefinitById(id);
 	}
-
-	@Override
-	@Transactional
-	public void deletePanellPredefinit(String username, Long id) {
-		panellPredefinitDao.deletePanellPredefinit(username, id);
-		
-	}
-
 
 	
 }

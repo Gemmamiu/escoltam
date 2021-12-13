@@ -13,7 +13,6 @@ import com.escoltam.springboot.projecte.escoltam.models.entity.Panell;
  * @author Gemma Rica
  *
  */
-
 public interface IPanellDao extends CrudRepository<Panell, Long>{
 
 	/**
@@ -21,7 +20,7 @@ public interface IPanellDao extends CrudRepository<Panell, Long>{
 	 * @param username de l'usuari
 	 * @return llistat de panells que té l'usuari
 	 */
-	@Query("select p from Panell p left join fetch p.usuari u where u.username=?1")
+	@Query("select p from Panell p left join fetch p.usuari u where u.username=?1 order by p.posicio")
 	public List<Panell> findAllPanellsByUsername (String username);
 	
 	/**

@@ -1,6 +1,8 @@
 package com.escoltam.springboot.projecte.escoltam.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.escoltam.springboot.projecte.escoltam.models.entity.PanellPredefinit;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
+import com.escoltam.springboot.projecte.escoltam.models.services.IPanellPredefinitService;
 import com.escoltam.springboot.projecte.escoltam.models.services.IUsuariService;
 
 
@@ -34,6 +38,9 @@ public class SignInRestController {
 	private IUsuariService usuariService;
 	
 	@Autowired
+	private IPanellPredefinitService panellPredefinitService;
+	
+	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	//PANTALLA REGISTRE USUARI
@@ -48,16 +55,23 @@ public class SignInRestController {
 	public ResponseEntity<?> create(@RequestBody Usuari usuari) throws IOException {
 		
 		Usuari usuariNew = null;
+		Usuari usuariAfegit = null;
 		
 		Map<String, Object> response = new HashMap<>();
+		
+		List<PanellPredefinit> panellsPredefinits = new ArrayList<>();
+		PanellPredefinit panellPredefinit = panellPredefinitService.findPanellPredefinitById(0L); 
+
 		
 		//Control errors al realitzar la crida en la base de dades
 		try {
 			
-			
 			usuariNew = usuariService.save(usuari);
 			usuariNew.setPassword(passwordEncoder.encode(usuariNew.getPassword()));
-			usuariNew = usuariService.save(usuari);
+			panellsPredefinits.add(panellPredefinit); //Afegir panell al array
+			usuariNew.setPanellPredefinits(panellsPredefinits);
+			
+			usuariAfegit = usuariService.save(usuariNew);
 
 		} catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de afegir usuari en la base de dades");
@@ -67,7 +81,7 @@ public class SignInRestController {
 		}
 		
 		response.put("Message", "L'usuari s'ha creat correctament");
-		response.put("usuari", usuariNew);
+		response.put("usuari", usuariAfegit);
 	      
 		System.out.println("L'usuari s'ha creat correctament, codi: " + HttpStatus.CREATED);
 		
@@ -100,7 +114,7 @@ public class SignInRestController {
 		
 		//Control errors al realitzar la crida en la base de dades
 		try {
-					
+			
 			usuariActual.setPassword(passwordEncoder.encode(usuari.getPassword()));
 			
 			usuariUpdate = usuariService.save(usuariActual);

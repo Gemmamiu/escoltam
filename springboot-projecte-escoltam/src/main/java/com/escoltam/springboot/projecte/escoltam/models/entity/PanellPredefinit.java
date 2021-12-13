@@ -74,5 +74,5 @@ public class PanellPredefinit implements Serializable{
 	}
 
 
-	private static final long serialVersionUID = 0L;
+	private static final long serialVersionUID = 1L;
 }
