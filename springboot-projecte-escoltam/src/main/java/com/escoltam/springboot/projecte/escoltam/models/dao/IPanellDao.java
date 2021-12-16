@@ -45,6 +45,6 @@ public interface IPanellDao extends CrudRepository<Panell, Long>{
 	 * @param username
 	 * @return panell favorit
 	 */
-	@Query("select p from Panell p where p.favorit=true and p.usuari = (select u.id from Usuari u where u.username=?1)")
+	@Query("select p from Panell p left join fetch p.usuari u where p.favorit=true and u.username=?1")
 	public Panell findPanellFavByUsername(String username);
 }
