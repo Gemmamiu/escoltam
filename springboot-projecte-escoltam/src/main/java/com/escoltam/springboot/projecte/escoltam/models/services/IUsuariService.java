@@ -63,6 +63,8 @@ public interface IUsuariService {
 	public List<Usuari>listAll(String role_name);
 	
 	public void delete(String username);
+	
+	public Usuari findByUsername2(String username);
 
 	
 }

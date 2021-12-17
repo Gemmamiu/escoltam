@@ -197,7 +197,7 @@ public class UsuariRestController {
 		//Control errors al realitzar la crida en la base de dades
 		try {
 			
-			usuari =  usuariService.findByUsername(username);
+			usuari =  usuariService.findByUsername2(username);
 		}catch(DataAccessException e) {
 			response.put("Message", "ERROR a l'hora de realitzar la consula en la base de dades");
 			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));

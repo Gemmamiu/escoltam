@@ -28,7 +28,7 @@ public interface IUsuariDao extends JpaRepository<Usuari, Long>{
 	public Usuari findByUsername (String username);
 	
 	//prova, funciona igual que l'anterior
-	@Query("select u from Usuari u where u.username=?1")
+	@Query("select u from Usuari u left join fetch u.panells where u.username=?1")
 	public Usuari findByUsername2 (String username);
 	
 	/**
