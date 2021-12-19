@@ -1,5 +1,6 @@
 package com.escoltam.springboot.projecte.escoltam.models.dao;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -23,4 +24,7 @@ public interface IIconaDao extends CrudRepository<Icona, Long>{
 	public Icona findIconaById (Long id);
 		
 
+	@Modifying
+	@Query("delete from Icona i where i.panell in(select p from Panell p join p.usuari u where u.username=?1)")
+	public void deleteIconesByUsername(String username);
 }

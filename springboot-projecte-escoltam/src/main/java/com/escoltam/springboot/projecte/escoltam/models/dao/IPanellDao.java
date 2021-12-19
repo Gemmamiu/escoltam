@@ -2,6 +2,7 @@ package com.escoltam.springboot.projecte.escoltam.models.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -47,4 +48,8 @@ public interface IPanellDao extends CrudRepository<Panell, Long>{
 	 */
 	@Query("select p from Panell p left join fetch p.usuari u where p.favorit=true and u.username=?1")
 	public Panell findPanellFavByUsername(String username);
+	
+	@Modifying
+	@Query("delete from Panell p where p.usuari =(select u from Usuari u where u.username=?1)")
+	public void deletePanellsByUsername(String username);
 }

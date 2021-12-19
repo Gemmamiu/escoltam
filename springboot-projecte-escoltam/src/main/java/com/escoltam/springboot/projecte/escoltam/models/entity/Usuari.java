@@ -65,7 +65,7 @@ public class Usuari implements Serializable {
 	private List<Role> roles;
 	 
 	@JsonIgnoreProperties(value={"usuari","hibernateLazyInitializer", "handler"}, allowSetters=true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "usuari", cascade= CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "usuari", cascade= CascadeType.ALL, orphanRemoval=false)
 	private List<Panell> panells;
 	
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

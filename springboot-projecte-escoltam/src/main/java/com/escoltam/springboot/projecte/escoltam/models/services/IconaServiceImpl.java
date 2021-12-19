@@ -31,8 +31,16 @@ public class IconaServiceImpl implements IIconaService{
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		iconaDao.deleteById(id);
+		
+	}
+
+	@Override
+	@Transactional
+	public void deleteIconesByUsername(String username) {
+		iconaDao.deleteIconesByUsername(username);
 		
 	}
 

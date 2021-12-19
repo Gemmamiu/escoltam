@@ -52,5 +52,7 @@ public interface IPanellService {
 	 * @return panell preferit
 	 */
 	public Panell findPanellFavByUsername(String username);
+	
+	public void deletePanellsByUsername(String username);
 }
 

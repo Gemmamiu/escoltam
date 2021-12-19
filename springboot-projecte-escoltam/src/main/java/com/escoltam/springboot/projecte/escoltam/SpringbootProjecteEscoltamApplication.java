@@ -45,61 +45,61 @@ public class SpringbootProjecteEscoltamApplication{
 	    	Path rutaJo = Paths.get("src/main/resources/static/images").resolve("jo.png").toAbsolutePath();
 	    	byte[] fotoJo = Files.readAllBytes(rutaJo);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Jo",1,panellPredefinit,fotoJo));
+	    	iconaRepository.save(new Icona("jo",1,panellPredefinit,fotoJo));
 	    	
 	    	//ICONA TU
 	    	Path rutaTu = Paths.get("src/main/resources/static/images").resolve("tu.png").toAbsolutePath();
 	    	byte[] fotoTu = Files.readAllBytes(rutaTu);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Tu",2,panellPredefinit,fotoTu));
+	    	iconaRepository.save(new Icona("tu",2,panellPredefinit,fotoTu));
 	    	
 	    	//ICONA ELL
 	    	Path rutaEll = Paths.get("src/main/resources/static/images").resolve("ell.png").toAbsolutePath();
 	    	byte[] fotoEll = Files.readAllBytes(rutaEll);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Ell",3,panellPredefinit,fotoEll));
+	    	iconaRepository.save(new Icona("ell",3,panellPredefinit,fotoEll));
 	    	
 	    	//ICONA ELLA
 	    	Path rutaElla = Paths.get("src/main/resources/static/images").resolve("ella.png").toAbsolutePath();
 	    	byte[] fotoElla = Files.readAllBytes(rutaElla);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Ella",4,panellPredefinit,fotoElla));
+	    	iconaRepository.save(new Icona("ella",4,panellPredefinit,fotoElla));
 	    	
 	    	//ICONA NOSALTRES
 	    	Path rutaNosaltres = Paths.get("src/main/resources/static/images").resolve("nosaltres.png").toAbsolutePath();
 	    	byte[] fotoNosaltres = Files.readAllBytes(rutaNosaltres);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Nosaltres",5,panellPredefinit,fotoNosaltres));
+	    	iconaRepository.save(new Icona("nosaltres",5,panellPredefinit,fotoNosaltres));
 	    	
 	    	//ICONA VOSALTRES
 	    	Path rutaVosaltres = Paths.get("src/main/resources/static/images").resolve("vosaltres.png").toAbsolutePath();
 	    	byte[] fotoVosaltres = Files.readAllBytes(rutaVosaltres);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Vosaltres",6,panellPredefinit,fotoVosaltres));
+	    	iconaRepository.save(new Icona("vosaltres",6,panellPredefinit,fotoVosaltres));
 	    	
 	    	//ICONA ELLS
 	    	Path rutaElls = Paths.get("src/main/resources/static/images").resolve("ells.png").toAbsolutePath();
 	    	byte[] fotoElls = Files.readAllBytes(rutaElls);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Ells",7,panellPredefinit,fotoElls));
+	    	iconaRepository.save(new Icona("ells",7,panellPredefinit,fotoElls));
 	    	
 	    	//ICONA ELLES
 	    	Path rutaElles = Paths.get("src/main/resources/static/images").resolve("elles.png").toAbsolutePath();
 	    	byte[] fotoElles = Files.readAllBytes(rutaElles);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Elles",8,panellPredefinit,fotoElles));
+	    	iconaRepository.save(new Icona("elles",8,panellPredefinit,fotoElles));
 	    	
 	    	//ICONA SI
 	    	Path rutaSi = Paths.get("src/main/resources/static/images").resolve("si.png").toAbsolutePath();
 	    	byte[] fotoSi = Files.readAllBytes(rutaSi);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("Si",9,panellPredefinit,fotoSi));
+	    	iconaRepository.save(new Icona("si",9,panellPredefinit,fotoSi));
 	    	
 	    	//ICONA NO
 	    	Path rutaNo = Paths.get("src/main/resources/static/images").resolve("no.png").toAbsolutePath();
 	    	byte[] fotoNo = Files.readAllBytes(rutaNo);
 	    	panellPredefinit = panellPredefinitRepository.findPanellPredefinitById(0L);
-	    	iconaRepository.save(new Icona("No",10,panellPredefinit,fotoNo));
+	    	iconaRepository.save(new Icona("no",10,panellPredefinit,fotoNo));
 	    };
 	}
 	

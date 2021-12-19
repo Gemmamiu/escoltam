@@ -57,5 +57,12 @@ public class PanellServiceImpl implements IPanellService{
 		return panellDao.findPanellFavByUsername(username);
 	}
 
+	@Override
+	@Transactional
+	public void deletePanellsByUsername(String username) {
+		panellDao.deletePanellsByUsername(username);
+		
+	}
+
 
 }

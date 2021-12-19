@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Role;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari;
 import com.escoltam.springboot.projecte.escoltam.models.entity.Usuari.Voice;
+import com.escoltam.springboot.projecte.escoltam.models.services.IIconaService;
+import com.escoltam.springboot.projecte.escoltam.models.services.IPanellService;
 import com.escoltam.springboot.projecte.escoltam.models.services.IUsuariService;
 
 /**
@@ -38,6 +40,12 @@ public class UsuariRestController {
 
 	@Autowired
 	private IUsuariService usuariService;
+	
+	@Autowired
+	private IPanellService panellService;
+	
+	@Autowired
+	private IIconaService iconaService;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -226,8 +234,11 @@ public class UsuariRestController {
 	
 		Map<String, Object> response = new HashMap<>();
 		
-		try {
 		
+		try {
+	
+			iconaService.deleteIconesByUsername(username);
+			panellService.deletePanellsByUsername(username);
 			usuariService.delete(username);
 			
 		}catch(DataAccessException e) {

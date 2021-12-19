@@ -31,6 +31,7 @@ public interface IIconaService {
 	 */
 	public void delete(Long id);
 	
+	public void deleteIconesByUsername(String username);
 	
 
 }
