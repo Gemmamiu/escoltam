@@ -49,7 +49,7 @@ public class Usuari implements Serializable {
 	@Column(name="username", unique = true, length = 50, nullable = false)
 	private String username;
 
-	@Column(length = 60)
+	@Column(length = 500)
 	private String password;
 
 	@Column(columnDefinition = "Boolean default false")

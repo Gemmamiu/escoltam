@@ -23,7 +23,10 @@ public interface IIconaDao extends CrudRepository<Icona, Long>{
 	@Query("select i from Icona i where i.id=?1")
 	public Icona findIconaById (Long id);
 		
-
+	/**
+	 * Eiminiar totes les icones per username
+	 * @param username
+	 */
 	@Modifying
 	@Query("delete from Icona i where i.panell in(select p from Panell p join p.usuari u where u.username=?1)")
 	public void deleteIconesByUsername(String username);

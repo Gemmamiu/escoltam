@@ -49,6 +49,10 @@ public interface IPanellDao extends CrudRepository<Panell, Long>{
 	@Query("select p from Panell p left join fetch p.usuari u where p.favorit=true and u.username=?1")
 	public Panell findPanellFavByUsername(String username);
 	
+	/**
+	 * Eliminar tots els panells per username
+	 * @param username
+	 */
 	@Modifying
 	@Query("delete from Panell p where p.usuari =(select u from Usuari u where u.username=?1)")
 	public void deletePanellsByUsername(String username);

@@ -1,9 +1,9 @@
 /* Creacció usuaris i rols */
 /*Password d'usuaris és 12345 - En aquí ja està encriptat*/
-INSERT INTO usuari (username, password, enabled, voice) VALUES ('gemmarica94@gmail.com','$2a$10$RmdEsvEfhI7Rcm9f/uZXPebZVCcPC7ZXZwV51efAvMAp1rIaRAfPK', true, 'FEMALE');
-INSERT INTO usuari (username, password, enabled, voice) VALUES ('jonatanchaler@gmail.com','$2a$10$RmdEsvEfhI7Rcm9f/uZXPebZVCcPC7ZXZwV51efAvMAp1rIaRAfPK', true, 'MALE');
-INSERT INTO usuari (username, password, enabled, voice) VALUES ('jogomloz@gmail.com','$2a$10$RmdEsvEfhI7Rcm9f/uZXPebZVCcPC7ZXZwV51efAvMAp1rIaRAfPK', true, 'MALE');
-INSERT INTO usuari (username, password, enabled, voice) VALUES ('mariaprova@gmail.com','$2a$10$RmdEsvEfhI7Rcm9f/uZXPebZVCcPC7ZXZwV51efAvMAp1rIaRAfPK', true, 'FEMALE');
+INSERT INTO usuari (username, password, enabled, voice) VALUES ('gemmarica94@gmail.com','$2a$12$NGGpCdNgotZEt3YvcpV95e0YaTPlORB9hf4rWYQwd6N8s1we/qUFC', true, 'FEMALE');
+INSERT INTO usuari (username, password, enabled, voice) VALUES ('jonatanchaler@gmail.com','$2a$12$NGGpCdNgotZEt3YvcpV95e0YaTPlORB9hf4rWYQwd6N8s1we/qUFC', true, 'MALE');
+INSERT INTO usuari (username, password, enabled, voice) VALUES ('jogomloz@gmail.com','$2a$12$NGGpCdNgotZEt3YvcpV95e0YaTPlORB9hf4rWYQwd6N8s1we/qUFC', true, 'MALE');
+INSERT INTO usuari (username, password, enabled, voice) VALUES ('mariaprova@gmail.com','$2a$12$NGGpCdNgotZEt3YvcpV95e0YaTPlORB9hf4rWYQwd6N8s1we/qUFC', true, 'FEMALE');
 
 INSERT INTO role (name) VALUES ('ROLE_USER');
 INSERT INTO role (name) VALUES ('ROLE_ADMIN');
